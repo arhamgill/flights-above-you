@@ -4,6 +4,7 @@ import Popup from "./Popup";
 import { useState } from "react";
 import ProgreessTracker from "./ProgressTracker";
 import { LocationProps } from "./ProgressTracker";
+import { shareLocation } from "../lib/shareLocation";
 
 function GetStarted() {
   const [showPopup, setShowPopup] = useState(false);
@@ -12,8 +13,8 @@ function GetStarted() {
   const [error, setError] = useState("");
   const getlocation = async () => {
     try {
-      // const locationData: LocationProps = await shareLocation();
-      const locationData = { lat: 36.7014631, lng: -118.755997 }; //Testing
+      const locationData: LocationProps = await shareLocation();
+      // const locationData = { lat: 36.7014631, lng: -118.755997 }; //Testing
       setLocation(locationData);
       setLocationShared(true);
       console.log(locationData.lat, locationData.lng);
