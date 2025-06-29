@@ -16,6 +16,9 @@ export const getFlights = async (
     );
     if (response.status === 200) {
       let flights = response.data.states;
+      if (!flights || flights.length === 0) {
+        return [];
+      }
       //Filter flights based on altitude
       flights = flights.filter((flight: any) => {
         const altitude = flight[7];
