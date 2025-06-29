@@ -2,8 +2,6 @@
 import React from "react";
 import Popup from "./Popup";
 import { useState } from "react";
-import { shareLocation } from "../lib/shareLocation";
-import { Check } from "lucide-react";
 import ProgreessTracker from "./ProgressTracker";
 import { LocationProps } from "./ProgressTracker";
 
@@ -14,7 +12,8 @@ function GetStarted() {
   const [error, setError] = useState("");
   const getlocation = async () => {
     try {
-      const locationData: LocationProps = await shareLocation();
+      // const locationData: LocationProps = await shareLocation();
+      const locationData = { lat: 36.7014631, lng: -118.755997 }; //Testing
       setLocation(locationData);
       setLocationShared(true);
       console.log(locationData.lat, locationData.lng);
@@ -42,13 +41,13 @@ function GetStarted() {
           <button
             disabled={locationShared}
             onClick={getlocation}
-            className="bg-white px-4 py-2 rounded-md text-black hover:bg-black hover:text-white border border-white cursor-pointer transition-colors
+            className="bg-white px-4 py-2 w-48 rounded-md text-black hover:bg-black hover:text-white border border-white cursor-pointer transition-colors
             disabled:cursor-default disabled:hover:bg-white disabled:hover:text-black"
           >
             {locationShared ? "Location Shared" : "Share Your Location"}{" "}
-            {locationShared && (
+            {/* {locationShared && (
               <Check className="inline-block text-green-500" />
-            )}
+            )} */}
           </button>
           {locationShared && location && (
             <ProgreessTracker lat={location.lat} lng={location.lng} />
