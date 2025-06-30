@@ -7,7 +7,7 @@ function Hero() {
         Want to see an AirPlane above your house?
       </h1>
       <p className="text-center text-md max-w-2xl">
-        This is a simple app to see flights above your house using FlightAware
+        This is a simple app to see flights above your house using OpenSky
         API. Just enter your location and and go outside to see the flights.
       </p>
     </div>
