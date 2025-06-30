@@ -15,9 +15,9 @@ export default function AboutMe() {
       </div>
       <div className="flex-1">
         <p className="max-w-2xl text-center">
-          Hi, I'm Arham Gill. I'm computer a science student and a full-stack
-          web developer. This is just a fun tool I built because I was bored
-          during summer vacations.
+          Hi, I&apos;m Arham Gill. I&apos;m computer a science student and a
+          full-stack web developer. This is just a fun tool I built because I
+          was bored during summer vacations.
         </p>
       </div>
       <div className="flex gap-4 text-blue-500 underline">

@@ -3,6 +3,7 @@ import React from "react";
 import { getFlights } from "../lib/functions";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { Flight } from "@/app/flights/page";
 export interface LocationProps {
   lat: number;
   lng: number;
@@ -12,7 +13,7 @@ function ProgressTracker({ lat, lng }: LocationProps) {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [flights, setFlights] = React.useState<any[]>([]);
+  const [flights, setFlights] = React.useState<Flight[]>([]);
   const [hasSearched, setHasSearched] = useState(false);
   const handleGetFlights = async () => {
     try {
@@ -23,7 +24,7 @@ function ProgressTracker({ lat, lng }: LocationProps) {
 
       const result = await getFlights({ lat, lng }, 0.4);
 
-      await new Promise((resolve) => setTimeout(resolve, 2500)); // 2.5 seconds delay
+      await new Promise((resolve) => setTimeout(resolve, 1000));
 
       setFlights(result);
       setLoading(false);
@@ -31,7 +32,7 @@ function ProgressTracker({ lat, lng }: LocationProps) {
     } catch (error) {
       console.error("Error fetching flights:", error);
 
-      await new Promise((resolve) => setTimeout(resolve, 2500));
+      await new Promise((resolve) => setTimeout(resolve, 1000));
 
       setError("Failed to fetch flights. Please try again later.");
       setLoading(false);
@@ -49,7 +50,7 @@ function ProgressTracker({ lat, lng }: LocationProps) {
         onClick={handleGetFlights}
         className="bg-white px-6 py-2 w-48 rounded-md text-black hover:bg-black hover:text-white border border-white cursor-pointer transition-colors disabled:cursor-default disabled:hover:bg-white disabled:hover:text-black"
       >
-        {loading ? "Fetching Data" : "Get Flights"}
+        {loading ? "Fetching Data..." : "Get Flights"}
       </button>
       {hasSearched &&
         (flights.length > 0 ? (

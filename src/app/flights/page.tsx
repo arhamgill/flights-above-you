@@ -1,10 +1,18 @@
 "use client";
 import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 
-export default function FlightsPage() {
+export interface Flight {
+  callsign: string | null;
+  originCountry: string | null;
+  distance?: number;
+  altitude: number | null;
+  direction: number | null;
+}
+
+function FlightsContent() {
   const searchParams = useSearchParams();
-  const [flights, setFlights] = useState<any[]>([]);
+  const [flights, setFlights] = useState<Flight[]>([]);
 
   // Function to convert degrees to compass direction
   const getCompassDirection = (degrees: number): string => {
@@ -27,7 +35,7 @@ export default function FlightsPage() {
     const flightsParam = searchParams.get("flights");
     if (flightsParam) {
       try {
-        const parsed = JSON.parse(decodeURIComponent(flightsParam));
+        const parsed: Flight[] = JSON.parse(decodeURIComponent(flightsParam));
         setFlights(parsed);
         console.log("Flights data:", parsed);
       } catch (err) {
@@ -99,5 +107,20 @@ export default function FlightsPage() {
         </div>
       )}
     </div>
+  );
+}
+
+export default function FlightsPage() {
+  return (
+    <Suspense fallback={
+      <div className="container mx-auto p-4">
+        <h1 className="text-2xl font-bold mb-6 text-center">Flights Above You</h1>
+        <div className="text-center py-8">
+          <p className="text-gray-500 text-lg">Loading flights data...</p>
+        </div>
+      </div>
+    }>
+      <FlightsContent />
+    </Suspense>
   );
 }

@@ -18,10 +18,12 @@ function GetStarted() {
       setLocation(locationData);
       setLocationShared(true);
       console.log(locationData.lat, locationData.lng);
-    } catch (error: any) {
-      console.log(error.message);
+    } catch (error: unknown) {
+      const errorMessage =
+        error instanceof Error ? error.message : "An unknown error occurred";
+      console.log(errorMessage);
       setLocationShared(false);
-      setError(error.message);
+      setError(errorMessage);
     }
   };
   return (
