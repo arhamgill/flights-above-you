@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "See Flights Above You",
-  description: "A simple app to see flights above you using FlightAware API",
+  description: "A simple app to see flights above you using OpenSky API",
 };
 
 export default function RootLayout({
